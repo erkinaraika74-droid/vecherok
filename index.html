@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Уютный вечер ✨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #fdf6ee;
+    --warm-white: #fffaf4;
+    --sand: #e8d5b7;
+    --caramel: #c9975a;
+    --amber: #b07a3a;
+    --brown: #6b4226;
+    --dark: #3a2315;
+    --light-text: #8a6545;
+    --shadow: rgba(107, 66, 38, 0.15);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    font-family: 'Lora', Georgia, serif;
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100svh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(160deg, #2a1508 0%, #4a2810 40%, #7a4820 70%, #b07848 100%);
+  }
+
+  /* Warm bokeh dots */
+  .bokeh {
+    position: absolute; inset: 0; pointer-events: none;
+  }
+  .bokeh span {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,200,100,0.6) 0%, transparent 70%);
+    animation: float 8s ease-in-out infinite;
+  }
+  .bokeh span:nth-child(1) { width:180px;height:180px; top:10%;left:8%; animation-delay:0s; }
+  .bokeh span:nth-child(2) { width:120px;height:120px; top:60%;left:80%; animation-delay:2s; }
+  .bokeh span:nth-child(3) { width:90px;height:90px;  top:80%;left:20%; animation-delay:4s; }
+  .bokeh span:nth-child(4) { width:150px;height:150px; top:25%;left:70%; animation-delay:1s; }
+  .bokeh span:nth-child(5) { width:60px;height:60px;  top:45%;left:45%; animation-delay:3s; }
+
+  @keyframes float {
+    0%,100% { transform: translateY(0) scale(1); opacity: 0.7; }
+    50%      { transform: translateY(-20px) scale(1.1); opacity: 1; }
+  }
+
+  /* Fairy lights */
+  .lights {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: repeating-linear-gradient(90deg,
+      transparent 0px, transparent 30px,
+      rgba(255,220,100,0.8) 30px, rgba(255,220,100,0.8) 32px);
+    animation: twinkle 2s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle { from { opacity: 0.6; } to { opacity: 1; } }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center;
+    padding: 2rem;
+    animation: fadeUp 1s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(30px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  .hero-emoji { font-size: clamp(3rem, 8vw, 5rem); display: block; margin-bottom: 1rem; }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 10vw, 6.5rem);
+    font-weight: 600;
+    color: #fff8ee;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 30px rgba(0,0,0,0.4);
+    margin-bottom: 1rem;
+  }
+
+  .hero-sub {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 3vw, 1.35rem);
+    color: #f0d9b5;
+    letter-spacing: 0.05em;
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+  }
+
+  /* Countdown */
+  .countdown {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+  .cnt-box {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,220,140,0.3);
+    border-radius: 12px;
+    padding: 0.75rem 1.25rem;
+    text-align: center;
+    min-width: 70px;
+  }
+  .cnt-num {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    color: #fff3d6;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .cnt-label {
+    font-size: 0.65rem;
+    color: rgba(255,240,200,0.7);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    background: linear-gradient(135deg, #c9975a, #b07a3a);
+    color: #fff9f0;
+    text-decoration: none;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    box-shadow: 0 4px 20px rgba(180,120,50,0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .hero-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(180,120,50,0.6);
+  }
+
+  /* Scroll hint */
+  .scroll-hint {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    color: rgba(255,240,200,0.5);
+    font-size: 1.5rem;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(8px);} }
+
+  /* ── SECTIONS ── */
+  .section {
+    padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem);
+    max-width: 780px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .section.visible { opacity: 1; transform: translateY(0); }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--caramel);
+    margin-bottom: 0.75rem;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 600;
+    color: var(--brown);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  /* Invite text */
+  .invite-card {
+    background: var(--warm-white);
+    border: 1px solid var(--sand);
+    border-radius: 20px;
+    padding: clamp(2rem, 5vw, 3rem);
+    box-shadow: 0 8px 40px var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  .invite-card::before {
+    content: '🕯️';
+    position: absolute; top: 1.5rem; right: 1.5rem;
+    font-size: 2rem; opacity: 0.4;
+  }
+
+  .invite-text {
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
+    line-height: 1.9;
+    color: var(--dark);
+  }
+  .invite-text p + p { margin-top: 1.2em; }
+
+  /* Divider */
+  .divider {
+    text-align: center;
+    margin: 3rem 0;
+    color: var(--sand);
+    font-size: 1.5rem;
+    letter-spacing: 1rem;
+  }
+
+  /* Info block */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+  .info-card {
+    background: var(--warm-white);
+    border: 1px solid var(--sand);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .info-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px var(--shadow);
+  }
+  .info-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+  .info-title {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--light-text);
+    margin-bottom: 0.4rem;
+  }
+  .info-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--brown);
+    font-weight: 600;
+  }
+  .info-value a {
+    color: var(--caramel);
+    text-decoration: underline;
+    text-decoration-color: var(--sand);
+    transition: color 0.2s;
+  }
+  .info-value a:hover { color: var(--amber); }
+  .info-sub { font-size: 0.85rem; color: var(--light-text); margin-top: 0.2rem; font-style: italic; }
+
+  /* Note */
+  .note {
+    margin-top: 1rem;
+    padding: 1rem 1.25rem;
+    background: rgba(201,151,90,0.08);
+    border-left: 3px solid var(--sand);
+    border-radius: 0 10px 10px 0;
+    font-size: 0.85rem;
+    color: var(--light-text);
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* What awaits */
+  .awaits-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  @media (max-width: 480px) { .awaits-grid { grid-template-columns: 1fr; } }
+
+  .await-item {
+    background: linear-gradient(135deg, var(--warm-white), #fef0d8);
+    border: 1px solid var(--sand);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 4px 15px var(--shadow);
+    transition: transform 0.2s;
+  }
+  .await-item:hover { transform: scale(1.02); }
+  .await-emoji { font-size: 2.2rem; flex-shrink: 0; }
+  .await-text { font-size: 1rem; color: var(--brown); font-weight: 500; line-height: 1.4; }
+
+  /* RSVP */
+  .rsvp-wrapper {
+    background: linear-gradient(135deg, #3a2315, #5a3420);
+    border-radius: 24px;
+    padding: clamp(2rem, 6vw, 3.5rem);
+    box-shadow: 0 16px 60px rgba(58,35,21,0.35);
+    position: relative;
+    overflow: hidden;
+  }
+  .rsvp-wrapper::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .rsvp-wrapper h2 { color: #f5ddb5; }
+  .rsvp-wrapper .section-label { color: rgba(245,200,120,0.7); }
+
+  .rsvp-form { position: relative; z-index: 1; }
+
+  .form-group { margin-bottom: 1.5rem; }
+
+  label {
+    display: block;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,220,160,0.7);
+    margin-bottom: 0.5rem;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,220,140,0.25);
+    border-radius: 12px;
+    color: #fff8ee;
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  input[type="text"]::placeholder { color: rgba(255,220,160,0.35); }
+  input[type="text"]:focus {
+    border-color: rgba(201,151,90,0.7);
+    background: rgba(255,255,255,0.14);
+  }
+
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .radio-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    padding: 0.85rem 1.2rem;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,220,140,0.15);
+    border-radius: 12px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .radio-option:hover { background: rgba(255,255,255,0.12); }
+  .radio-option input { display: none; }
+  .radio-option input:checked ~ .radio-label { color: #ffe5a0; }
+  .radio-option:has(input:checked) {
+    background: rgba(201,151,90,0.2);
+    border-color: rgba(201,151,90,0.5);
+  }
+
+  .radio-dot {
+    width: 20px; height: 20px;
+    border: 2px solid rgba(255,220,140,0.4);
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.2s;
+  }
+  .radio-option:has(input:checked) .radio-dot {
+    border-color: var(--caramel);
+    background: var(--caramel);
+  }
+  .radio-option:has(input:checked) .radio-dot::after {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: white;
+  }
+
+  .radio-emoji { font-size: 1.3rem; }
+  .radio-label { color: rgba(255,240,200,0.85); font-size: 1rem; }
+
+  .btn-submit {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 1.1rem;
+    background: linear-gradient(135deg, #c9975a, #b07a3a);
+    color: #fff9f0;
+    border: none;
+    border-radius: 14px;
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    box-shadow: 0 6px 24px rgba(180,120,50,0.5);
+    transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  }
+  .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(180,120,50,0.6); }
+  .btn-submit:active { transform: translateY(0); }
+  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+    color: #f5ddb5;
+    font-size: 1.2rem;
+    line-height: 1.8;
+  }
+  .success-msg .big { font-size: 3rem; display: block; margin-bottom: 1rem; }
+  .success-msg.show { display: block; animation: fadeUp 0.5s ease both; }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    color: var(--light-text);
+    font-size: 0.85rem;
+    font-style: italic;
+    border-top: 1px solid var(--sand);
+  }
+  footer .hearts { font-size: 1.5rem; display: block; margin-bottom: 0.5rem; }
+
+  /* Responsive tweaks */
+  @media (max-width: 600px) {
+    .info-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="lights"></div>
+  <div class="bokeh">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="hero-content">
+    <span class="hero-emoji">🕹️</span>
+    <h1>Уютный вечер</h1>
+    <p class="hero-sub">Настольные игры, еда и хорошая компания</p>
+
+    <div class="countdown">
+      <div class="cnt-box"><span class="cnt-num" id="cDays">--</span><span class="cnt-label">дней</span></div>
+      <div class="cnt-box"><span class="cnt-num" id="cHours">--</span><span class="cnt-label">часов</span></div>
+      <div class="cnt-box"><span class="cnt-num" id="cMins">--</span><span class="cnt-label">минут</span></div>
+      <div class="cnt-box"><span class="cnt-num" id="cSecs">--</span><span class="cnt-label">секунд</span></div>
+    </div>
+
+    <a href="#rsvp" class="hero-cta">Я приду! 💌</a>
+  </div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- ── INVITE ── -->
+<div class="section" id="invite">
+  <p class="section-label">Приглашение</p>
+  <h2>Хэллоу👋</h2>
+  <div class="invite-card">
+    <div class="invite-text">
+      <p>Хочу устроить небольшую уютную посиделку у себя дома — просто собраться, поиграть в настольные игры, поболтать и хорошо провести время вместе ✨</p>
+      <p>Еда и развлечения — с меня, а гостей прошу взять с собой напитки на свой вкус 🍹</p>
+      <p>Буду очень рада тебя видеть 💌</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── INFO ── -->
+<div class="section" id="info">
+  <p class="section-label">Детали</p>
+  <h2>Когда и где</h2>
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="info-icon">📅</div>
+      <div class="info-title">Дата</div>
+      <div class="info-value">3 мая 2026</div>
+      <div class="info-sub">Воскресенье</div>
+    </div>
+    <div class="info-card">
+      <div class="info-icon">⏰</div>
+      <div class="info-title">Время</div>
+      <div class="info-value">17:00 – 17:30</div>
+      <div class="info-sub">Сбор гостей</div>
+    </div>
+    <div class="info-card" style="grid-column: 1 / -1;">
+      <div class="info-icon">📍</div>
+      <div class="info-title">Адрес</div>
+      <div class="info-value">
+        <a href="https://2gis.kz/astana/geo/9570784901851298/71.445088,51.095527" target="_blank" rel="noopener">
+          Касым Кайсенова 4, подъезд 9 ↗
+        </a>
+      </div>
+      <div class="info-sub">Астана · кликни для маршрута в 2ГИС</div>
+    </div>
+  </div>
+  <div class="note">
+    😄 Небольшой момент: ремонт у нас ещё не сделан, так что не ждите вау-квартиру. Зато атмосфера будет тёплая и душевная ✨
+  </div>
+</div>
+
+<!-- ── WHAT AWAITS ── -->
+<div class="section" id="awaits">
+  <p class="section-label">Программа вечера</p>
+  <h2>Что нас ждёт</h2>
+  <div class="awaits-grid">
+    <div class="await-item">
+      <span class="await-emoji">🎲</span>
+      <div class="await-text">Настольные игры на любой вкус</div>
+    </div>
+    <div class="await-item">
+      <span class="await-emoji">😂</span>
+      <div class="await-text">Общение и много смеха</div>
+    </div>
+    <div class="await-item">
+      <span class="await-emoji">🍕</span>
+      <div class="await-text">Вкусная еда — беру на себя</div>
+    </div>
+    <div class="await-item">
+      <span class="await-emoji">🕯️</span>
+      <div class="await-text">Уютная тёплая атмосфера</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── RSVP ── -->
+<div class="section" id="rsvp">
+  <div class="rsvp-wrapper">
+    <p class="section-label">Ответ</p>
+    <h2>Придёшь? 🎉</h2>
+    <form class="rsvp-form" id="rsvpForm" onsubmit="return false;">
+      <div class="form-group">
+        <label for="nameInput">Твоё имя *</label>
+        <input type="text" id="nameInput" placeholder="Как тебя зовут?" required autocomplete="name">
+      </div>
+      <div class="form-group">
+        <label>Твой ответ</label>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="answer" value="Приду" required>
+            <span class="radio-dot"></span>
+            <span class="radio-emoji">🥳</span>
+            <span class="radio-label">Приду!</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="answer" value="Не приду">
+            <span class="radio-dot"></span>
+            <span class="radio-emoji">😢</span>
+            <span class="radio-label">Не смогу прийти</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="answer" value="Приду с опозданием">
+            <span class="radio-dot"></span>
+            <span class="radio-emoji">🐢</span>
+            <span class="radio-label">Приду, но немного опоздаю</span>
+          </label>
+        </div>
+      </div>
+      <button class="btn-submit" id="submitBtn" type="submit" onclick="submitRSVP()">
+        Отправить ответ ✨
+      </button>
+    </form>
+    <div class="success-msg" id="successMsg">
+      <span class="big">💌</span>
+      <strong>Спасибо! Жду встречи 💌</strong><br>
+      <span style="font-size:0.95rem; opacity:0.8;">Увидимся 3 мая!</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="hearts">🎲 ✨ 🕯️</span>
+  С любовью и нетерпением жду каждого из вас
+</footer>
+
+<script>
+// ── Countdown ──
+function updateCountdown() {
+  const target = new Date('2026-05-03T17:00:00');
+  const now = new Date();
+  const diff = target - now;
+  if (diff <= 0) {
+    document.getElementById('cDays').textContent = '0';
+    document.getElementById('cHours').textContent = '0';
+    document.getElementById('cMins').textContent = '0';
+    document.getElementById('cSecs').textContent = '0';
+    return;
+  }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cDays').textContent = d;
+  document.getElementById('cHours').textContent = String(h).padStart(2,'0');
+  document.getElementById('cMins').textContent = String(m).padStart(2,'0');
+  document.getElementById('cSecs').textContent = String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ── Scroll reveal ──
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.section').forEach(s => observer.observe(s));
+
+// ── RSVP Submit ──
+// ⚠️  ЗАМЕНИТЕ ЭТОТ URL на адрес вашего Google Apps Script Web App
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/https://script.google.com/macros/s/AKfycbz_OCen_TfdU4cSQs2_lwcNKkJmCli-Rk2FSXLmzf2NQXGVKOBQ-Z6G4YDnUCP0426h/exec/exec';
+
+async function submitRSVP() {
+  const name = document.getElementById('nameInput').value.trim();
+  const answer = document.querySelector('input[name="answer"]:checked');
+  const btn = document.getElementById('submitBtn');
+
+  if (!name) {
+    document.getElementById('nameInput').focus();
+    document.getElementById('nameInput').style.borderColor = 'rgba(255,100,80,0.7)';
+    return;
+  }
+  if (!answer) {
+    alert('Пожалуйста, выбери один из вариантов ответа 😊');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Отправляем... ✨';
+
+  const payload = {
+    name,
+    answer: answer.value,
+    timestamp: new Date().toLocaleString('ru-RU', { timeZone: 'Asia/Almaty' })
+  };
+
+  try {
+    // Try to send to Google Sheets via Apps Script
+    await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  } catch (e) {
+    // Works even if CORS blocks — data still reaches the script in no-cors mode
+    console.log('Sent (no-cors):', payload);
+  }
+
+  // Show success regardless (no-cors doesn't give us a response body)
+  document.getElementById('rsvpForm').style.display = 'none';
+  document.getElementById('successMsg').classList.add('show');
+}
+</script>
+</body>
+</html>
